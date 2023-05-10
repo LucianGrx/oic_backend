@@ -16,10 +16,8 @@ require('dotenv').config();
 const salt = bcrypt.genSaltSync(10);
 const secret = process.env.TOKEN_SECRET;
 
-
-
 const corsOptions = (req, callback) => {
-  const allowedOrigins = [process.env.APP_API_URL || "https://mern-oic-app.onrender.com"];
+  const allowedOrigins = [process.env.APP_API_URL || "https://ovidius-innovation-center.netlify.app"];
   const origin = req.header('Origin');
   const corsOptions = {
     origin: allowedOrigins.includes(origin) ? origin : false,
@@ -30,7 +28,7 @@ const corsOptions = (req, callback) => {
 
 app.use(cors(corsOptions));
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", process.env.APP_API_URL || "https://mern-oic-app.onrender.com");
+  res.setHeader("Access-Control-Allow-Origin", process.env.APP_API_URL || "https://ovidius-innovation-center.netlify.app");
   res.setHeader(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept, Authorization"
@@ -182,6 +180,11 @@ app.put("/post", uploadMiddleware.single("file"), async (req, res) => {
   res.json(postDoc);
 });
 });
+
+app.get("/", (req, res) => {
+  res.json({ message: "Bun venit pe backend-ul aplicației OIC!" });
+});
+
 
 app.get("/post", async (req, res) => {
   const limit = parseInt(req.query.limit) || 0;

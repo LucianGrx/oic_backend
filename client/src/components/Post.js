@@ -8,7 +8,7 @@ const Post = ({_id, title, summary, cover, content, createdAt, author }) => {
       <div className="max-w-2xl mx-auto transform hover:scale-105 transition-transform duration-300">
         <div className="bg-white shadow-2xl rounded-lg overflow-hidden">
           <Link to={`/post/${_id}`}>
-            <img className="w-full h-64 object-cover object-center" src={`${process.env.REACT_APP_API_URL}/` + cover} alt="poza-blog" />
+            <img className="w-full h-64 object-cover object-center" src={"https://oic-backend.onrender.com/" + cover} alt="poza-blog" />
             <div className="absolute top-0 left-0 w-full h-64 bg-gradient-to-b from-indigo-700/20 to-transparent"></div>
           </Link>
           <div className="p-6">

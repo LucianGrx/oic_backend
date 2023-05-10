@@ -9,7 +9,7 @@ const Home = () => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/post?limit=3`)
+    fetch('https://oic-backend.onrender.com/post?limit=3')
       .then((response) => response.json())
       .then((data) => setPosts(data));
   }, []);

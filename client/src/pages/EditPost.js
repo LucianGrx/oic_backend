@@ -15,7 +15,7 @@ const EditPost = () => {
   const { authInfo } = useContext(UserContext);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/post/` + id).then((response) => {
+    fetch(`https://oic-backend.onrender.com/post/` + id).then((response) => {
       response.json().then((postInfo) => {
         setTitle(postInfo.title);
         setContent(postInfo.content);
@@ -34,7 +34,7 @@ const EditPost = () => {
     if (files?.[0]) {
       data.set("file", files?.[0]);
     }
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/post`, {
+    const response = await fetch("https://oic-backend.onrender.com/post", {
       method: "PUT",
       body: data,
       credentials: "include",

@@ -9,7 +9,7 @@ const PostPage = () => {
   const { authInfo } = useContext(UserContext); // Change userInfo to authInfo
   const { id } = useParams();
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/post/${id}`).then((response) => {
+    fetch(`https://oic-backend.onrender.com/post/${id}`).then((response) => {
       response.json().then((postInfo) => {
         setPostInfo(postInfo);
       });

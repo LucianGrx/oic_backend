@@ -7,7 +7,7 @@ const RegisterPage = () => {
   const register = async (ev) => {
     ev.preventDefault();
 
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/register`, {
+    const response = await fetch('https://oic-backend.onrender.com/register', {
       method: "POST",
       body: JSON.stringify({ username, password }),
       headers: { "Content-Type": "application/json" },

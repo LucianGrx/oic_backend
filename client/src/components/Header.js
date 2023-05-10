@@ -15,7 +15,7 @@ const Header = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/profile`, {
+        const response = await fetch("https://oic-backend.onrender.com/profile", {
           credentials: "include",
         });
         const data = await response.json();

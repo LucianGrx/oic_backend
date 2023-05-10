@@ -5,7 +5,7 @@ const Blog = () => {
     const [posts, setPosts] = useState('');
 
     useEffect(() => {
-      fetch(`${process.env.REACT_APP_API_URL}/post`).then((response) => {
+      fetch("https://oic-backend.onrender.com/post").then((response) => {
         response.json().then((posts) => {
           setPosts(posts);
         });
