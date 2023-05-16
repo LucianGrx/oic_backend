@@ -6,37 +6,32 @@ import { MdClose } from "react-icons/md";
 
 
 const Header = () => {
-  const { setAuthInfo, authInfo } = useContext(UserContext);
+  const { setUserInfo, userInfo } = useContext(UserContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch("https://oic-backend.onrender.com/profile", {
-          credentials: "include",
-        });
-        const data = await response.json();
-        setAuthInfo({ ...data, loading: false });
-      } catch (err) {
-        setAuthInfo({ loading: false });
-      }
-    }
+    fetch('https://oic-backend.onrender.com/profile', {
+      credentials: 'include',
+    }).then(response => {
+      response.json().then(userInfo => {
+        setUserInfo(userInfo);
+      });
+    });
+  }, []);
 
-    fetchData();
-  }, [setAuthInfo]);
   
   function logout() {
-    fetch(`${process.env.REACT_APP_API_URL}/logout`, {
+    fetch('https://oic-backend.onrender.com/logout', {
       credentials: "include",
       method: "POST",
     });
-    setAuthInfo(null);
+    setUserInfo(null);
   }
 
-  const username = authInfo?.username;
+  const username = userInfo?.username;
 
   return (
     <header className="mt-20">
@@ -76,7 +71,7 @@ const Header = () => {
                         >
                           Blog
                         </a>
-                        {!authInfo.loading && authInfo.isApproved && <Link to="/create">Create</Link>}
+                        {!userInfo.loading && userInfo.isApproved && <Link to="/create">Create</Link>}
                         <button onClick={logout}>Logout</button>
                       </div>
                     </div>
@@ -117,7 +112,7 @@ const Header = () => {
                       >
                         Blog
                       </a>
-                      {!authInfo.loading && authInfo.isApproved && <Link className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:text-gray-600 hover:bg-gray-100" to="/create">Create</Link>}
+                      {!userInfo.loading && userInfo.isApproved && <Link className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:text-gray-600 hover:bg-gray-100" to="/create">Create</Link>}
                         <button className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:text-gray-600 hover:bg-gray-100" onClick={logout}>Logout</button>
                     </div>
                   </div>

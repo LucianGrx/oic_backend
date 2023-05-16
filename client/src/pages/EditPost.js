@@ -12,7 +12,7 @@ const EditPost = () => {
   const [files, setFiles] = useState("");
   const [redirect, setRedirect] = useState(false);
 
-  const { authInfo } = useContext(UserContext);
+  const { userInfo } = useContext(UserContext);
 
   useEffect(() => {
     fetch(`https://oic-backend.onrender.com/post/` + id).then((response) => {
@@ -44,7 +44,7 @@ const EditPost = () => {
     }
   }
 
-  if (!authInfo || !authInfo.isApproved) {
+  if (!userInfo || !userInfo.isApproved) {
     return <Navigate to="/" />;
   }
 

@@ -5,7 +5,7 @@ import { Navigate } from "react-router-dom";
 import { UserContext } from "../components/UserContext";
 
 const CreatePost = () => {
-  const { authInfo } = useContext(UserContext);
+  const { userInfo } = useContext(UserContext);
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
   const [content, setContent] = useState("");
@@ -30,7 +30,7 @@ const CreatePost = () => {
     }
   }
 
-  if (!authInfo || !authInfo.isApproved) {
+  if (!userInfo || !userInfo.isApproved) {
     return (
       <div>
         <h1>Nu aveți permisiunea de a crea postări.</h1>

@@ -1,32 +1,28 @@
 import React, { useContext, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { UserContext } from "../components/UserContext";
-import Cookies from 'js-cookie';
-import jwt_decode from 'jwt-decode';
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [redirect, setRedirect] = useState(false);
-  const { setAuthInfo } = useContext(UserContext);
-  
+  const { setUserInfo } = useContext(UserContext);
   const login = async (ev) => {
     ev.preventDefault();
-   const response = await fetch("https://oic-backend.onrender.com/login", {
+   const response = await fetch('https://oic-backend.onrender.com/login', {
       method: 'POST',
       body: JSON.stringify({username, password}),
       headers: {'Content-Type':'application/json'},
       credentials: 'include',
-    })
-    if (response.ok) {
-      const token = Cookies.get("token");
-      const decodedToken = jwt_decode(token);
-      const authInfoFromToken = {
-        id: decodedToken.id,
-        username: decodedToken.username
-      };
-      setAuthInfo(authInfoFromToken);
-      setRedirect(true);
+    });
+    if(response.ok) {
+      console.log(response)
+      response.json().then(userInfo => {
+        console.log(userInfo)
+       setUserInfo(userInfo);
+        setRedirect(true);
+      })
+ 
     }else{
       alert('wrong credentials');
     }

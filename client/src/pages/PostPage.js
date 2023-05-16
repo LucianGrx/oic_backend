@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const PostPage = () => {
   const [postInfo, setPostInfo] = useState(null);
-  const { authInfo } = useContext(UserContext); // Change userInfo to authInfo
+  const { userInfo } = useContext(UserContext);
   const { id } = useParams();
   useEffect(() => {
     fetch(`https://oic-backend.onrender.com/post/${id}`).then((response) => {
@@ -24,7 +24,7 @@ const PostPage = () => {
         <div className="bg-white shadow-lg rounded-lg overflow-hidden">
           <img
             className="w-full h-96 object-cover object-center"
-            src={`${process.env.REACT_APP_API_URL}/${postInfo.cover}`}
+            src={`https://oic-backend.onrender.com/${postInfo.cover}`}
             alt=""
           />
           <div className="p-8 md:p-12">
@@ -32,7 +32,7 @@ const PostPage = () => {
               {postInfo.title}
             </h1>
             <p className="py-3 text-gray-500">{postInfo.author.username}</p>
-            {authInfo && authInfo.id === postInfo.author._id && (
+            {userInfo && userInfo.id === postInfo.author._id && (
               <div className="text-center">
                 <Link className=" bg-gray-700 text-white p-4 rounded-md" to={`/edit/${postInfo._id}`}>Edit this post</Link>
               </div>
