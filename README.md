@@ -1,4 +1,4 @@
-# oic_backend
+# Ovidius Innovation Center
 
 **Preview Demo**
 
